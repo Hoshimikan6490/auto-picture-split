@@ -1,0 +1,16 @@
+{
+  "name": "auto-picture-split-system",
+  "version": "1.0.0",
+  "description": "このコードは画像のレンズ情報を基に画像ファイルをディレクトリごとに整理するスクリプトです。",
+  "license": "MIT",
+  "author": "Hoshimikan6490",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "exiftool-vendored": "^29.1.0",
+    "sharp": "^0.33.5"
+  }
+}

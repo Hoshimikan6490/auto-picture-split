@@ -1,0 +1,14 @@
+# node_modulesは重いし、各自で準備出来るので、例外
+node_modules
+
+# 一旦dataフォルダの全てのファイル・フォルダを例外に
+data/*
+# 各ディレクトリは対象にする
+!data/new
+!data/old
+# でも、thumbnailsディレクトリとsubtitlesディレクトリの"中身"は全部対象外
+data/new/*
+data/old/*
+# なお、github上にディレクトリを作るための一時隠しファイルは対象にする。
+!data/new/.movedFilesHere
+!data/old/.beforeMoveFilesHere
