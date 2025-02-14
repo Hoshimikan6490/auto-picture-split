@@ -1,4 +1,4 @@
-# auto-picture-split-system
+# auto-picture-split
 画像のexif属性からレンズ情報を取得してそれを元に画像ファイルを整理するスクリプトです。
 
 ## 動作確認済み環境
@@ -7,7 +7,7 @@
 - npm: 11.1.0
 
 ## コードの使い方
-1. `git clone https://github.com/Hoshimikan6490/auto-picture-split-system.git`を実行するか、このコードをzip形式でダウンロードする。
+1. `git clone https://github.com/Hoshimikan6490/auto-picture-split.git`を実行するか、このコードをzip形式でダウンロードする。
 2. zip形式でダウンロードした場合は、展開(解凍)する。
 3. このプロジェクトの一番上のディレクトリで、`npm i`を実行する。
 4. 画像を`./data/old`の中に全て保存する。

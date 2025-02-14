@@ -1,6 +1,6 @@
 {
-  "name": "auto-picture-split-system",
-  "version": "1.0.0",
+  "name": "auto-picture-split",
+  "version": "1.0.1",
   "description": "このコードは画像のレンズ情報を基に画像ファイルをディレクトリごとに整理するスクリプトです。",
   "license": "MIT",
   "author": "Hoshimikan6490",
