@@ -16,6 +16,7 @@
 7. `config.js`の「unDoFileMove」を「false」,「moveFile」を「true」の状態にして、`node index.js`を実行し、写真のレンズ情報を確認する。
 
 ## config.jsの記入例
+TODO: 記入例を書く
 ```js
 module.exports = {
   // ファイルの移動を全て元に戻す場合はtrueにする
@@ -35,8 +36,8 @@ module.exports = {
 ### 誤った設定でファイル移動をしてしまった場合はどうすれば良いですか？
 誤った設定でファイル移動をしてしまった場合は、`config.js`の「unDoFileMove」を「true」の状態で、`node index.js`を実行すれば、`./data/new`に移動された画像ファイルが全て`./data/old`に戻されます。
 ### 同一のファイル名の画像があった場合はどうなりますか？
-(後で書きます)
+(TODO: 後で書きます)
 ### 「[ERROR 00] ○○○○」と表示されました
-(後で書きます)
+(TODO: 後で書きます)
 ### 「[ERROR 01] ○○○○」と表示されました。
-(後で書きます)
+(TODO: 後で書きます)
