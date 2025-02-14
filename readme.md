@@ -15,6 +15,22 @@
 6. 手順5で確認したレンズ情報を基に`config.js`の「lensTypes」にレンズ情報の一部を、「newDirs」に整理後のディレクトリ名を設定する。なお、ここで指定した「lensTypes」と「newDirs」は同一の順番で処理されるため、「lensType」の１番目で指定したレンズで撮影された写真を「newDirs」の１番目で指定したディレクトリ名のディレクトリに保存される。
 7. `config.js`の「unDoFileMove」を「false」,「moveFile」を「true」の状態にして、`node index.js`を実行し、写真のレンズ情報を確認する。
 
+## config.jsの記入例
+```js
+module.exports = {
+  // ファイルの移動を全て元に戻す場合はtrueにする
+  unDoFileMove: false,
+
+  // ファイルの移動をするかどうか
+  moveFile: false,
+
+  // 整理後に保存されるフォルダ名を指定
+  newDirs: [""],
+  // 整理時に使用するレンズタイプの検索キーワードを指定
+  lensTypes: [""],
+};
+```
+
 ## FAQ
 ### 誤った設定でファイル移動をしてしまった場合はどうすれば良いですか？
 誤った設定でファイル移動をしてしまった場合は、`config.js`の「unDoFileMove」を「true」の状態で、`node index.js`を実行すれば、`./data/new`に移動された画像ファイルが全て`./data/old`に戻されます。
