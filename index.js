@@ -2,6 +2,7 @@ const fs = require("node:fs");
 const path = require("path");
 const { exiftool } = require("exiftool-vendored");
 const { lensTypes, moveFile, newDirs, unDoFileMove } = require("./config");
+const { startWatching } = require("./generateFileChangelog");
 
 async function getLensInfo(imagePath) {
   try {
@@ -42,32 +43,38 @@ async function moveFileFromLensModel() {
           `ファイル名「${image}」のレンズ情報は「${LensModel}」です。`
         );
 
-      // レンズモデル名が含まれるフォルダ名を探してそのフォルダに保存
-      let foundLensModel = null;
-      for (const index in lensTypes) {
-        if (LensModel.includes(lensTypes[index])) {
-          foundLensModel = index;
-          break;
+      if (LensModel) {
+        // レンズモデル名が含まれるフォルダ名を探してそのフォルダに保存
+        let foundLensModel = null;
+        for (const index in lensTypes) {
+          if (LensModel.includes(lensTypes[index])) {
+            foundLensModel = index;
+            break;
+          }
         }
-      }
 
-      if (foundLensModel != null) {
-        return moveFileWithoutOverWrite(
-          filePath,
-          `${newFolderPath}/${newDirs[foundLensModel]}/${image}`
-        );
+        if (foundLensModel != null) {
+          return moveFileWithoutOverWrite(
+            filePath,
+            `${newFolderPath}/${newDirs[foundLensModel]}/${image}`
+          );
+        } else {
+          // 見つからない場合は、「その他」フォルダに移動する
+          return moveFileWithoutOverWrite(
+            filePath,
+            `${newFolderPath}/その他/${image}`
+          );
+        }
       } else {
-        // 見つからない場合は、「その他」フォルダに移動する
-        return moveFileWithoutOverWrite(
-          filePath,
-          `${newFolderPath}/その他/${image}`
+        return console.log(
+          `ファイルパス「${filePath}」のファイルは、レンズ情報が見つからなかったため、処理が行われませんでした。`
         );
       }
     }); // 各ファイルを順番に処理
   }
 
   await exiftool.end(); // すべての処理が終わった後に ExifTool を終了
-  console.info("done");
+  console.info("処理が完了しました。");
 }
 
 async function fileMoveUndo() {
@@ -94,12 +101,20 @@ async function fileMoveUndo() {
       await moveFileWithoutOverWrite(srcPath, destPath);
     }
   });
+
+  return console.log("処理が完了しました。");
 }
 
-if (!unDoFileMove) {
-  console.info(`画像ファイルの移動を開始します`);
-  moveFileFromLensModel();
-} else {
-  console.info(`画像ファイルの移動をキャンセルします`);
-  fileMoveUndo();
+async function run() {
+  await startWatching();
+
+  if (!unDoFileMove) {
+    console.info(`画像ファイルの移動を開始します`);
+    moveFileFromLensModel();
+  } else {
+    console.info(`画像ファイルの移動をキャンセルします`);
+    fileMoveUndo();
+  }
 }
+
+run();

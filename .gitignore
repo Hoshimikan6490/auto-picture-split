@@ -1,6 +1,9 @@
 # node_modulesは重いし、各自で準備出来るので、例外
 node_modules
 
+# ログファイルはアップする必要が無いので、除外
+file_changes.log
+
 # 一旦dataフォルダの全てのファイル・フォルダを例外に
 data/*
 # 各ディレクトリは対象にする
