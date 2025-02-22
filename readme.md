@@ -1,5 +1,9 @@
 # auto-picture-split
+## 概要
 画像のexif属性からレンズ情報を取得してそれを元に画像ファイルを整理するスクリプトです。
+
+[![Twitter共有ボタン](https://img.shields.io/twitter/url?url=https://twitter.com/share&style=social&logo=x&label=Twitter%E3%81%A7%E5%85%B1%E6%9C%89%E3%81%99%E3%82%8B)](https://twitter.com/share?text=%E7%94%BB%E5%83%8F%E3%81%AEexif%E5%B1%9E%E6%80%A7%E3%81%8B%E3%82%89%E3%83%AC%E3%83%B3%E3%82%BA%E6%83%85%E5%A0%B1%E3%82%92%E5%8F%96%E5%BE%97%E3%81%97%E3%81%A6%E3%81%9D%E3%82%8C%E3%82%92%E5%85%83%E3%81%AB%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E6%95%B4%E7%90%86%E3%81%99%E3%82%8B%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88&url=https%3A%2F%2Fgithub.com%2FHoshimikan6490%2Fauto-picture-split&hashtags=%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%2C%E8%87%AA%E5%8B%95%E4%BB%95%E5%88%86%E3%81%91&via=hoshimikan6490)
+
 
 ## 動作確認済み環境
 - OS: Windows 11 Education
