@@ -18,10 +18,14 @@
 ## config.jsの記入例
 ```js
 module.exports = {
-  // ファイルの移動を全て元に戻す場合はtrueにする
+  // ファイルの移動を全て元に戻す場合はtrueにする。trueの場合は、他のパラメータの内容は無視される
   unDoFileMove: false,
 
-  // ファイルの移動をするかどうか
+  // ファイルの変更履歴を残す場合はtrue。残さない場合はfalseに設定する。
+  watchFileChanges: true,
+
+  // 画像ファイルの移動を行うかどうか(trueの場合に移動する)
+  // 画像のレンズ情報を知りたいだけで移動しない場合はfalseに設定する
   moveFile: false,
 
   // 整理後に保存されるフォルダ名を指定
@@ -35,10 +39,12 @@ module.exports = {
 ### 誤った設定でファイル移動をしてしまった場合はどうすれば良いですか？
 誤った設定でファイル移動をしてしまった場合は、`config.js`の「unDoFileMove」を「true」の状態で、`node index.js`を実行すれば、`./data/new`に移動された画像ファイルが全て`./data/old`に戻されます。
 ### 同一のファイル名の画像があった場合はどうなりますか？
+原則、警告を出して処理をスキップする仕様になっております。スキップした場合は`[ERROR 01]: FILE ALREADY EXISTED(srcPATH=○○○○, destPATH=○○○○)`というエラーが表示されます。心配であれば`config.js`の「watchFileChanges」を「true」に設定することでファイルの作成・削除・上書き等のログを記録することができます。
+### 「[ERROR 00]: CAN NOT GET LENS INFO(PATH=○○○○)」と表示されました。どうすれば良いですか？
 (TODO: 後で書きます)
-### 「[ERROR 00] ○○○○」と表示されました
+### 「[ERROR 01]: FILE ALREADY EXISTED(srcPATH=○○○○, destPATH=○○○○)」と表示されました。どうすれば良いですか？
 (TODO: 後で書きます)
-### 「[ERROR 01] ○○○○」と表示されました。
+### 「[ERROR 02]: CAN NOT MOVE FILE BECAUSE LENS INFO IS NOT FOUND(PATH=○○○○)」と表示されました。どうすれば良いですか？
 (TODO: 後で書きます)
 
 ## ライセンス情報
