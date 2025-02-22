@@ -10,13 +10,15 @@ async function getLensInfo(imagePath) {
 
     return metadata.LensModel ? metadata.LensModel : null;
   } catch (error) {
-    console.error(`[ERROR 00]: PATH=${imagePath}`);
+    console.error(`[ERROR 00]: CAN NOT GET LENS INFO(PATH=${imagePath})`);
   }
 }
 
 async function moveFileWithoutOverWrite(srcPath, destPath) {
   if (fs.existsSync(destPath))
-    return console.error(`[ERROR 01]: PATH=${destPath}`);
+    return console.error(
+      `[ERROR 01]: FILE ALREADY EXISTED(srcPATH=${srcPath}, destPATH=${destPath})`
+    );
 
   // ファイルが存在しなければ移動する
   fs.renameSync(srcPath, destPath);
@@ -66,8 +68,8 @@ async function moveFileFromLensModel() {
           );
         }
       } else {
-        return console.log(
-          `ファイルパス「${filePath}」のファイルは、レンズ情報が見つからなかったため、処理が行われませんでした。`
+        return console.error(
+          `[ERROR 02]: CAN NOT MOVE FILE BECAUSE LENS INFO IS NOT FOUND(PATH=${filePath})`
         );
       }
     }); // 各ファイルを順番に処理
