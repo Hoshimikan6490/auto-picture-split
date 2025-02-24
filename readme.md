@@ -15,6 +15,7 @@
 - npm: 11.1.0
 
 ## コードの使い方
+1. nodejsとnpmのインストールを行う。(方法は、お調べください。どうしても分からない事などがあればDiscussionsでご質問ください。)
 1. `git clone https://github.com/Hoshimikan6490/auto-picture-split.git`を実行するか、このコードをzip形式でダウンロードする。
 2. zip形式でダウンロードした場合は、展開(解凍)する。
 3. このプロジェクトの一番上のディレクトリで、`npm i`を実行する。
