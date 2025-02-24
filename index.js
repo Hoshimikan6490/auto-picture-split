@@ -61,7 +61,7 @@ async function moveFileFromLensModel() {
             `${newFolderPath}/${newDirs[foundLensModel]}/${image}`
           );
         } else {
-          // 見つからない場合は、「その他」フォルダに移動する
+          // レンズ名に対応するフォルダが見つからない場合は、「その他」フォルダに移動する
           return moveFileWithoutOverWrite(
             filePath,
             `${newFolderPath}/その他/${image}`
