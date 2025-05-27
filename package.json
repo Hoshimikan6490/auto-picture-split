@@ -11,6 +11,6 @@
   },
   "dependencies": {
     "chokidar": "^4.0.3",
-    "exiftool-vendored": "^29.3.0"
+    "exiftool-vendored": "^30.0.0"
   }
 }
