@@ -1,16 +1,16 @@
 {
-  "name": "auto-picture-split",
-  "version": "1.0.1",
-  "description": "このコードは画像のレンズ情報を基に画像ファイルをディレクトリごとに整理するスクリプトです。",
-  "license": "MIT",
-  "author": "Hoshimikan6490",
-  "type": "commonjs",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "chokidar": "^4.0.3",
-    "exiftool-vendored": "^30.4.0"
-  }
+	"name": "auto-picture-split",
+	"version": "1.0.1",
+	"description": "このコードは画像のレンズ情報を基に画像ファイルをディレクトリごとに整理するスクリプトです。",
+	"license": "MIT",
+	"author": "Hoshimikan6490",
+	"type": "commonjs",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"chokidar": "^4.0.3",
+		"exiftool-vendored": "^30.4.0"
+	}
 }
