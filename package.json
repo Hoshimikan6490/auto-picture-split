@@ -10,7 +10,7 @@
 		"start": "node index.js"
 	},
 	"dependencies": {
-		"chokidar": "^4.0.3",
-		"exiftool-vendored": "^34.2.0"
+		"chokidar": "^5.0.0",
+		"exiftool-vendored": "^35.10.1"
 	}
 }
