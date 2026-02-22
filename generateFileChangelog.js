@@ -1,9 +1,9 @@
-const chokidar = require("chokidar");
-const fs = require("fs");
+const chokidar = require('chokidar');
+const fs = require('fs');
 
 // 監視対象のディレクトリとログファイルの設定
-const dirToWatch = "./data"; // 監視するディレクトリ
-const logFile = "file_changes.log"; // ログファイル名
+const dirToWatch = './data'; // 監視するディレクトリ
+const logFile = 'file_changes.log'; // ログファイル名
 
 // Date内容の調整
 // 2桁0埋め
@@ -28,7 +28,7 @@ function fromTimestampToJPstr(timestamp) {
 
 	// フォーマットされた日付文字列を作成
 	return `${year}/${zz(month)}/${zz(day)} ${zz(hours)}:${zz(minutes)}:${zz(
-		seconds
+		seconds,
 	)}.${milliseconds}`;
 }
 
@@ -36,12 +36,12 @@ function fromTimestampToJPstr(timestamp) {
 function logChange(action, filePath) {
 	const timestamp = new Date();
 	const logMessage = `${fromTimestampToJPstr(
-		timestamp
+		timestamp,
 	)} - ${action}: ${filePath}\n`;
 
 	fs.appendFile(logFile, logMessage, (err) => {
 		if (err) {
-			console.error("ログの記録に失敗しました:", err);
+			console.error('ログの記録に失敗しました:', err);
 		}
 	});
 }
@@ -55,30 +55,31 @@ function startWatching() {
 	});
 
 	// 監視するファイル変更イベント
-	watcher.on("ready", function () {
+	watcher.on('ready', function () {
 		watcher
-			.on("add", (filePath) => logChange("ファイル作成", filePath))
-			.on("change", (filePath) => logChange("ファイル変更", filePath))
-			.on("unlink", (filePath) => logChange("ファイル削除", filePath))
-			.on("rename", (oldPath, newPath) => {
+			.on('add', (filePath) => logChange('ファイル作成', filePath))
+			.on('change', (filePath) => logChange('ファイル変更', filePath))
+			.on('unlink', (filePath) => logChange('ファイル削除', filePath))
+			.on('rename', (oldPath, newPath) => {
 				// 名前変更や移動を扱う
 				fs.access(newPath, fs.constants.F_OK, (err) => {
 					if (err) {
 						// 新しいパスが存在しない場合は削除とみなす
-						logChange("ファイル削除", oldPath);
+						logChange('ファイル削除', oldPath);
 					} else {
 						// 新しいパスが存在する場合は移動または名前変更とみなす
 						logChange(
-							"ファイル移動/名前変更",
-							`旧パス: ${oldPath}, 新パス: ${newPath}`
+							'ファイル移動/名前変更',
+							`旧パス: ${oldPath}, 新パス: ${newPath}`,
 						);
 					}
 				});
 			})
-			.on("error", (error) => console.error("監視エラー:", error));
+			.on('error', (error) => console.error('監視エラー:', error));
 	});
 
 	console.log(`監視を開始しました: ${dirToWatch}`);
+	return watcher;
 }
 
 module.exports = {

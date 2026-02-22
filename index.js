@@ -1,8 +1,8 @@
-const fs = require("node:fs");
-const path = require("path");
-const { exiftool } = require("exiftool-vendored");
-const { lensTypes, moveFile, newDirs, unDoFileMove } = require("./config");
-const { startWatching } = require("./generateFileChangelog");
+const fs = require('node:fs');
+const path = require('path');
+const { exiftool } = require('exiftool-vendored');
+const { lensTypes, moveFile, newDirs, unDoFileMove } = require('./config');
+const { startWatching } = require('./generateFileChangelog');
 
 async function getLensInfo(imagePath) {
 	try {
@@ -17,7 +17,7 @@ async function getLensInfo(imagePath) {
 async function moveFileWithoutOverWrite(srcPath, destPath) {
 	if (fs.existsSync(destPath))
 		return console.error(
-			`[ERROR 01]: FILE ALREADY EXISTED(srcPATH=${srcPath}, destPATH=${destPath})`
+			`[ERROR 01]: FILE ALREADY EXISTED(srcPATH=${srcPath}, destPATH=${destPath})`,
 		);
 
 	// ファイルが存在しなければ移動する
@@ -25,8 +25,8 @@ async function moveFileWithoutOverWrite(srcPath, destPath) {
 }
 
 async function moveFileFromLensModel() {
-	const oldFolderPath = "./data/old";
-	const newFolderPath = "./data/new";
+	const oldFolderPath = './data/old';
+	const newFolderPath = './data/new';
 	const oldFiles = fs.readdirSync(oldFolderPath);
 
 	// 移動先フォルダの存在確認と作成
@@ -42,7 +42,7 @@ async function moveFileFromLensModel() {
 		await getLensInfo(filePath).then((LensModel) => {
 			if (!moveFile)
 				return console.info(
-					`ファイル名「${image}」のレンズ情報は「${LensModel}」です。`
+					`ファイル名「${image}」のレンズ情報は「${LensModel}」です。`,
 				);
 
 			if (LensModel) {
@@ -58,36 +58,36 @@ async function moveFileFromLensModel() {
 				if (foundLensModel != null) {
 					return moveFileWithoutOverWrite(
 						filePath,
-						`${newFolderPath}/${newDirs[foundLensModel]}/${image}`
+						`${newFolderPath}/${newDirs[foundLensModel]}/${image}`,
 					);
 				} else {
 					// レンズ名に対応するフォルダが見つからない場合は、「その他」フォルダに移動する
 					return moveFileWithoutOverWrite(
 						filePath,
-						`${newFolderPath}/その他/${image}`
+						`${newFolderPath}/その他/${image}`,
 					);
 				}
 			} else {
 				return console.error(
-					`[ERROR 02]: CAN NOT MOVE FILE BECAUSE LENS INFO IS NOT FOUND(PATH=${filePath})`
+					`[ERROR 02]: CAN NOT MOVE FILE BECAUSE LENS INFO IS NOT FOUND(PATH=${filePath})`,
 				);
 			}
 		}); // 各ファイルを順番に処理
 	}
 
 	await exiftool.end(); // すべての処理が終わった後に ExifTool を終了
-	console.info("処理が完了しました。");
+	console.info('処理が完了しました。');
 }
 
 async function fileMoveUndo() {
-	const oldFolderPath = "./data/old";
-	const newFolderPath = "./data/new";
+	const oldFolderPath = './data/old';
+	const newFolderPath = './data/new';
 
 	// newのディレクトリを取得
 	let newFolders = fs
 		.readdirSync(newFolderPath)
 		.filter((name) =>
-			fs.statSync(path.join(newFolderPath, name)).isDirectory()
+			fs.statSync(path.join(newFolderPath, name)).isDirectory(),
 		);
 
 	// 各ディレクトリ内の全てのファイルをoldフォルダに移動
@@ -104,19 +104,23 @@ async function fileMoveUndo() {
 		}
 	});
 
-	return console.log("処理が完了しました。");
+	return console.log('処理が完了しました。');
 }
 
 async function run() {
-	await startWatching();
+	const watcher = await startWatching();
 
 	if (!unDoFileMove) {
 		console.info(`画像ファイルの移動を開始します`);
-		moveFileFromLensModel();
+		await moveFileFromLensModel();
 	} else {
 		console.info(`画像ファイルの移動をキャンセルします`);
-		fileMoveUndo();
+		await fileMoveUndo();
 	}
+
+	// 処理完了後にwatcherを終了
+	await watcher.close();
+	console.info('監視を終了しました。');
 }
 
 run();
